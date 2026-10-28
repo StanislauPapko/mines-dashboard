@@ -60,11 +60,11 @@ elif plot_type == 'Stacked':
     for mine in mines.columns:
         fig.add_bar(x=x, y=mines[mine], name = mine)
     fig.update_layout(barmode='stack')
-fig.add_scatter(x=x[outliers_layer], y=y[outliers_layer], mode='markers', marker={'color':'red', 'size':10}, name='Outliers')
+fig.add_scatter(x=x[outliers_layer], y=y[outliers_layer], mode='markers', marker={'color':'yellow', 'size':15}, name='Outliers')
 x_ids = np.arange(len(y))
 model = Polynomial.fit(x_ids, y, deg=trend_degree)
 y_trend = model(x_ids)
-fig.add_scatter(x=x, y=y_trend, mode='lines', name='Trendline')
+fig.add_scatter(x=x, y=y_trend, mode='lines', line = {'width':5}, name='Trendline')
 fig.update_layout(margin={'t':0, 'b':0, 'l':0, 'r':0})
 st.plotly_chart(fig)
 report = generate_pdf(mine=mines_selector, mean=selected_mine.get_mean(), std=selected_mine.get_std(), median=selected_mine.get_median(),
