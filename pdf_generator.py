@@ -14,7 +14,7 @@ def print_anomaly_summary(pdf:FPDF, data:pd.DataFrame, type:str):
     if not data.empty:
         for _, row in data.iterrows():
             date_str = str(row['Date']).split()[0]
-            print_line(pdf, text=f"- {date_str}: {row['Extraction']:.2f} units extracted")
+            print_line(pdf, text=f"- {date_str}: {row['Extraction']:.2f} tons extracted")
 
 def generate_pdf(mine:str, mean:float, std:float, median:float, iqr:float, fig:go.Figure, x:pd.Series, y:pd.Series) -> bytes:
     pdf = FPDF()
