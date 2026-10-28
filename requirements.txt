@@ -1,0 +1,8 @@
+numpy
+pandas
+streamlit
+plotly
+scipy
+outlier-utils
+fpdf2
+kaleido
