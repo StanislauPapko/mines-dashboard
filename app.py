@@ -7,13 +7,15 @@ import plotly.graph_objects as go
 from pdf_generator import generate_pdf
 
 SHEET_ID = '1ofZ8WJh3Cpu-QC-Q1m2W6nRfGSunQLxlIvZrifL01zg'
-GID_ID = '1128364006'
+GID_ID = '808628764'
 URI_STRING = f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv&gid={GID_ID}'
 df_raw = pd.read_csv(URI_STRING)
+df_raw['date'] = pd.to_datetime(df_raw['date'], format='%d/%m/%Y')
+df = df_raw.pivot(index='date', columns='mine_name', values='extraction').reset_index()
 DATE_COLUMN_ID = 0
-FIRST_MINE_COLUMN_ID = 7
-date = pd.to_datetime(df_raw.iloc[:, DATE_COLUMN_ID])
-mines = df_raw.iloc[:,FIRST_MINE_COLUMN_ID:]
+FIRST_MINE_COLUMN_ID = 1
+date = df.iloc[:, DATE_COLUMN_ID]
+mines = df.iloc[:,FIRST_MINE_COLUMN_ID:]
 
 st.set_page_config(page_title='Mines Dashboard', layout='wide')
 st.title('Weyland-Yutani Corporation: Extraction Results')
